@@ -1,0 +1,6 @@
+open particular location,
+for compile:
+javac --module-path "C:\Java\javafx-sdk-24\lib" --add-modules javafx.controls,javafx.fxml -cp ".;C:\Users\pankh\Desktop\quiz-app\lib\gson-2.10.1.jar" *.java
+
+for run:
+java --module-path "C:\Java\javafx-sdk-24\lib" --add-modules javafx.controls,javafx.fxml -cp ".;C:\Users\pankh\Desktop\quiz-app\lib\gson-2.10.1.jar" QuizApp
