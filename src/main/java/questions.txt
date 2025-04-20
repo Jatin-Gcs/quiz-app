@@ -3,5 +3,4 @@ Which OOP concept allows a class to inherit properties from another class?|Polym
 What is polymorphism in OOP?|Using one interface for multiple data types,Protecting data from external access,Creating abstract classes,Defining methods in a superclass|Using one interface for multiple data types|multiple-choice
 Which keyword is used to create a subclass in Java?|extends,implements,super,this|extends|multiple-choice
 What is an abstract class in Java?|A class that cannot be instantiated,A class with only static methods,A class that can be instantiated,A class with no methods|A class that cannot be instantiated|multiple-choiceWhat is Your Name?|Jatin,Falgun,Om,Manan|Jatin|multiple-choice
-fssf|eaf|fe|multiple-choice
-jarin|f,u,g,h|f|multiple-choice
+
