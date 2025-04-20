@@ -1,44 +1,61 @@
-import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class QuizApp extends Application {
-    @Override
-    public void start(Stage primaryStage) {
-        // Create start screen
-        VBox root = new VBox(20);
-        root.setAlignment(Pos.CENTER);
-        root.setPadding(new Insets(20));
-        
-        Button startQuizButton = new Button("Start Quiz");
-        Button adminModeButton = new Button("Admin Mode");
-        
-        // Style buttons
-        startQuizButton.setStyle("-fx-font-size: 16px;");
-        adminModeButton.setStyle("-fx-font-size: 16px;");
-        
-        root.getChildren().addAll(startQuizButton, adminModeButton);
-        
-        // Set up scene
-        Scene scene = new Scene(root, 400, 300);
-        scene.getStylesheets().add("style.css");
-        primaryStage.setScene(scene);
-        primaryStage.setTitle("Interactive Quiz App");
-        primaryStage.show();
-        
-        // Button actions
-        QuizController quizController = new QuizController(primaryStage);
-        AdminController adminController = new AdminController(primaryStage);
-        
-        startQuizButton.setOnAction(e -> quizController.showQuizScreen());
-        adminModeButton.setOnAction(e -> adminController.showAdminScreen());
+public class ResultController {
+    private Stage stage;
+    private int score;
+    private int total;
+    private QuizApp quizApp; // Reference to QuizApp
+
+    public ResultController(Stage stage, int score, int total) {
+        this.stage = stage;
+        this.score = score;
+        this.total = total;
+        this.quizApp = new QuizApp(); // For accessing showStartScreen
     }
 
-    public static void main(String[] args) {
-        launch(args);
+    public void showResultScreen() {
+        // Create root layout
+        BorderPane root = new BorderPane();
+        root.setPadding(new Insets(20));
+
+        // Create centered VBox for content
+        VBox contentBox = new VBox(20);
+        contentBox.setAlignment(Pos.CENTER);
+        contentBox.setMaxWidth(400);
+        contentBox.setStyle("-fx-background-color: #ffffff; -fx-padding: 20; -fx-border-radius: 5; -fx-background-radius: 5;");
+
+        // Score label
+        Label scoreLabel = new Label("Score: " + score + "/" + total);
+        scoreLabel.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
+
+        // Progress bar
+        ProgressBar progressBar = new ProgressBar((double) score / total);
+        progressBar.setPrefWidth(300); // Fixed width for progress bar
+
+        // Restart button
+        Button restartButton = new Button("Restart Quiz");
+        restartButton.setStyle("-fx-font-size: 14px;");
+        restartButton.setMaxWidth(200);
+
+        contentBox.getChildren().addAll(scoreLabel, progressBar, restartButton);
+
+        // Center content in BorderPane
+        root.setCenter(contentBox);
+
+        // Set up scene
+        Scene scene = new Scene(root, 600, 400);
+        scene.getStylesheets().add("style.css");
+        stage.setScene(scene);
+
+        // Restart action
+        restartButton.setOnAction(e -> quizApp.showStartScreen());
     }
 }
